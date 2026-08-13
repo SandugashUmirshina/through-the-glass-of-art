@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f0e9dd"/><circle cx="60" cy="60" r="35" fill="#f3c9d8"/><circle cx="140" cy="140" r="35" fill="#bcdcf0"/><text x="100" y="105" font-size="60" text-anchor="middle" fill="#5a4a3a" font-family="serif">A</text></svg></template>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&amp;family=Karla:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  body{margin:0;box-sizing:border-box;background:oklch(0.96 0.014 75);}
+  *{box-sizing:border-box;}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes glassIn{0%{opacity:0;transform:scale(0.82) rotate(-1.5deg)}100%{opacity:1;transform:scale(1) rotate(0deg)}}
+  @keyframes fadeUp{0%{opacity:0;transform:translateY(24px)}100%{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+
+<div style="width:100%;background:oklch(0.96 0.014 75);font-family:'Karla',sans-serif;color:oklch(0.28 0.02 50)">
+
+  <div style="position:relative;width:100%">
+    <div style="position:relative;width:100%;height:360px;overflow:hidden;background:linear-gradient(135deg, oklch(0.87 0.06 350) 0%, oklch(0.93 0.02 72) 45%, oklch(0.85 0.06 235) 100%)">
+      
+    </div>
+    <div style="position:absolute;bottom:-64px;left:88px;width:132px;height:132px;border-radius:50%;overflow:hidden;border:6px solid oklch(0.96 0.014 75);box-shadow:0 8px 20px rgba(60,45,35,0.18);background:oklch(0.96 0.014 75)">
+      <img src="uploads/Through the Glass of Art logo.png" alt="Through the Glass of Art logo" style="width:100%;height:100%;object-fit:cover;display:block">
+    </div>
+  </div>
+
+  <div style="max-width:900px;margin:0 auto;padding:96px 88px 0 88px">
+    <h1 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:46px;margin:0 0 12px;letter-spacing:0.01em">Through the Glass of Art</h1>
+    <p style="font-size:17px;line-height:1.6;color:oklch(0.42 0.02 55);margin:0 0 32px;max-width:560px">Economics and finance through art, for underrepresented youth worldwide.</p>
+
+    <nav style="display:flex;gap:28px;flex-wrap:wrap;padding-bottom:36px;border-bottom:1px solid oklch(0.9 0.012 60)">
+      <a href="#explore" style="font-weight:600;font-size:15px;text-decoration:none;color:oklch(0.5 0.09 235);border-bottom:2px solid oklch(0.85 0.06 235);padding-bottom:4px">Explore</a>
+      <a href="#mission" style="font-weight:600;font-size:15px;text-decoration:none;color:oklch(0.52 0.09 350);border-bottom:2px solid oklch(0.87 0.06 350);padding-bottom:4px">Mission</a>
+      <a href="#about" style="font-weight:600;font-size:15px;text-decoration:none;color:oklch(0.5 0.09 235);border-bottom:2px solid oklch(0.85 0.06 235);padding-bottom:4px">About</a>
+      <a href="#why" style="font-weight:600;font-size:15px;text-decoration:none;color:oklch(0.52 0.09 350);border-bottom:2px solid oklch(0.87 0.06 350);padding-bottom:4px">Why This Exists</a>
+      <a href="#goals" style="font-weight:600;font-size:15px;text-decoration:none;color:oklch(0.5 0.09 235);border-bottom:2px solid oklch(0.85 0.06 235);padding-bottom:4px">Goals</a>
+    </nav>
+  </div>
+
+  <div id="explore" style="max-width:1080px;margin:0 auto;padding:72px 88px 96px 88px">
+    <div style="font-family:'Karla',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:oklch(0.5 0.09 235);margin-bottom:10px">Explore</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:32px;margin:0 0 12px">Click an artwork to step through the glass</h2>
+    <p style="font-size:16px;line-height:1.6;color:oklch(0.45 0.02 55);margin:0 0 48px;max-width:600px">Every piece below opens onto the world that made it — who paid for it, what it was worth, and what was happening around it.</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:44px 36px;justify-content:flex-start">
+      <sc-for list="{{ artworks }}" as="item" hint-placeholder-count="6">
+        <div onClick="{{ item.onSelect }}" style="width:220px;cursor:pointer;transform:rotate({{ item.rotate }}deg);transition:transform .25s ease" style-hover="width:220px;cursor:pointer;transform:rotate({{ item.rotate }}deg) scale(1.045);transition:transform .25s ease">
+          <div style="width:100%;height:210px;box-shadow:0 10px 22px rgba(60,45,35,0.16)">
+            <image-slot id="artwork-{{ item.id }}" shape="rounded" radius="6" style="width:100%;height:100%" placeholder="{{ item.title }} — image"></image-slot>
+          </div>
+          <div style="margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+            <span style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:{{ item.accentBg }};color:{{ item.accentDeep }}">{{ item.category }}</span>
+            <span style="font-size:12px;color:oklch(0.55 0.02 55)">{{ item.year }}</span>
+          </div>
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:20px;margin-top:6px">{{ item.title }}</div>
+          <div style="font-size:13px;color:oklch(0.5 0.02 55)">{{ item.creator }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="mission" style="background:oklch(0.94 0.02 235)">
+    <div style="max-width:760px;margin:0 auto;padding:80px 88px">
+      <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:oklch(0.5 0.09 235);margin-bottom:10px">Mission</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:30px;margin:0 0 18px">Art is never just art</h2>
+      <p style="font-size:17px;line-height:1.75;color:oklch(0.32 0.02 50);margin:0 0 18px">Through the Glass of Art is a free platform that teaches economics and art side by side. My mission is to spread this kind of education internationally, especially to youth in underrepresented communities who don't usually get access to it.</p>
+      <p style="font-size:17px;line-height:1.75;color:oklch(0.32 0.02 50);margin:0">I want to give youth digital access to knowledge in economics and finance through art, while also building a real appreciation for art itself.</p>
+    </div>
+  </div>
+
+  <div id="about" style="background:oklch(0.96 0.014 75)">
+    <div style="max-width:760px;margin:0 auto;padding:80px 88px">
+      <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:oklch(0.52 0.09 350);margin-bottom:10px">About</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:30px;margin:0 0 18px">How it works</h2>
+      <p style="font-size:17px;line-height:1.75;color:oklch(0.32 0.02 50);margin:0">Click on a painting, a ballet, or a piece of literature, and learn the financial history behind it: the artist, the country, and the period it came from. Everything on the site is free, with no sign-up and no ads.</p>
+    </div>
+  </div>
+
+  <div id="why" style="background:oklch(0.94 0.02 350)">
+    <div style="max-width:760px;margin:0 auto;padding:80px 88px">
+      <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:oklch(0.52 0.09 350);margin-bottom:10px">Why This Exists</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:30px;margin:0 0 18px">History and economics belong together</h2>
+      <p style="font-size:17px;line-height:1.75;color:oklch(0.32 0.02 50);margin:0">Art and economics are usually taught apart, even though they were never really separate. I started this because I believe understanding both together is how art should be taught, and that knowledge should be available to any student, anywhere, for free.</p>
+    </div>
+  </div>
+
+  <div id="goals" style="background:oklch(0.96 0.014 75)">
+    <div style="max-width:760px;margin:0 auto;padding:80px 88px 96px 88px">
+      <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:oklch(0.5 0.09 235);margin-bottom:10px">Goals</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:30px;margin:0 0 24px">What we're working toward</h2>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;gap:14px;align-items:baseline"><span style="width:8px;height:8px;border-radius:50%;background:oklch(0.85 0.06 235);flex:none;margin-top:6px"></span><p style="margin:0;font-size:16px;line-height:1.6;color:oklch(0.32 0.02 50)">Teach the financial history behind art, not just the art itself.</p></div>
+        <div style="display:flex;gap:14px;align-items:baseline"><span style="width:8px;height:8px;border-radius:50%;background:oklch(0.87 0.06 350);flex:none;margin-top:6px"></span><p style="margin:0;font-size:16px;line-height:1.6;color:oklch(0.32 0.02 50)">Stay free and ad-free, always.</p></div>
+        <div style="display:flex;gap:14px;align-items:baseline"><span style="width:8px;height:8px;border-radius:50%;background:oklch(0.85 0.06 235);flex:none;margin-top:6px"></span><p style="margin:0;font-size:16px;line-height:1.6;color:oklch(0.32 0.02 50)">Reach youth internationally, with real focus on underrepresented communities.</p></div>
+        <div style="display:flex;gap:14px;align-items:baseline"><span style="width:8px;height:8px;border-radius:50%;background:oklch(0.87 0.06 350);flex:none;margin-top:6px"></span><p style="margin:0;font-size:16px;line-height:1.6;color:oklch(0.32 0.02 50)">Cover painting, dance, and literature, not just one discipline.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid oklch(0.9 0.012 60);padding:32px 88px;text-align:center">
+    <p style="margin:0;font-size:13px;color:oklch(0.55 0.02 55)">Through the Glass of Art — a free educational project. No ads, no accounts, no cost.</p>
+  </div>
+
+  <sc-if value="{{ hasSelected }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="position:fixed;inset:0;background:rgba(45,35,30,0.45);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;z-index:50;animation:fadeIn .2s ease;padding:24px">
+      <div onClick="{{ stopClick }}" style="position:relative;width:min(620px,100%);max-height:85vh;overflow:auto;background:oklch(0.975 0.01 75);border-radius:6px;box-shadow:0 30px 70px rgba(30,20,15,0.28),inset 0 0 0 1px rgba(255,255,255,0.7);padding:44px;animation:{{ modalAnimation }}">
+        <button onClick="{{ close }}" style="position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:none;background:{{ selected.accentBg }};color:oklch(0.25 0.02 50);font-size:18px;line-height:1;cursor:pointer">×</button>
+        <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:{{ selected.accentDeep }};margin-bottom:10px">{{ selected.category }} · {{ selected.year }}</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:34px;margin:0 0 4px">{{ selected.title }}</h2>
+        <div style="font-size:15px;color:oklch(0.48 0.02 55);margin-bottom:22px">{{ selected.creator }}</div>
+        <p style="font-size:16px;line-height:1.7;color:oklch(0.3 0.02 50);margin:0 0 26px">{{ selected.paragraph }}</p>
+        <sc-for list="{{ selected.facts }}" as="fact" hint-placeholder-count="3">
+          <div style="display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-top:1px solid oklch(0.9 0.012 60)">
+            <div style="font-size:14px;color:oklch(0.48 0.02 55)">{{ fact.label }}</div>
+            <div style="font-size:14px;font-weight:600;color:oklch(0.28 0.02 50);text-align:right">{{ fact.value }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentEmphasis&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;Balanced&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;Balanced&quot;, &quot;Blue-forward&quot;, &quot;Pink-forward&quot;], &quot;section&quot;: &quot;Theme&quot;}, &quot;revealEffect&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;Glass pane&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;Glass pane&quot;, &quot;Fade &amp; rise&quot;], &quot;section&quot;: &quot;Interaction&quot;}}">
+const ARTWORKS = [
+  { id: 'starry-night', title: 'The Starry Night', creator: 'Vincent van Gogh, 1889', category: 'Painting', year: '1889', accentName: 'blue', rotate: -2,
+    paragraph: "Van Gogh sold almost nothing in his lifetime and relied on a monthly allowance from his brother Theo, an art dealer. The painting had no market value when it was made — it gained one only decades later, as Post-Impressionism became collectible and museums began competing for major works.",
+    facts: [ {label:'Sold in his lifetime', value:'roughly 1 painting'}, {label:'Supported by', value:'brother Theo van Gogh'}, {label:'Now held at', value:'MoMA, New York'} ] },
+  { id: 'swan-lake', title: 'Swan Lake', creator: 'Tchaikovsky, Bolshoi Theatre, 1877', category: 'Ballet', year: '1877', accentName: 'pink', rotate: 2,
+    paragraph: "Swan Lake was created inside the Imperial Russian court system, where ballet was funded by the state as a mark of national prestige rather than as a commercial venture. Its rocky premiere had little to do with ticket sales — it was about satisfying imperial taste.",
+    facts: [ {label:'Funded by', value:'Imperial Russian court'}, {label:'Premiered at', value:'Bolshoi Theatre, Moscow'}, {label:'Today', value:'one of the most performed ballets worldwide'} ] },
+  { id: 'great-expectations', title: 'Great Expectations', creator: 'Charles Dickens, 1861', category: 'Literature', year: '1861', accentName: 'blue', rotate: -1.5,
+    paragraph: "Dickens published this novel in weekly installments in his own magazine, All the Year Round, to reverse falling sales. Serialization meant he was paid per issue, not per book — an economic model that shaped his pacing, cliffhangers, and the rise of a mass reading public in Victorian England.",
+    facts: [ {label:'Published as', value:'weekly serial installments'}, {label:'Paid by', value:'the issue, not the book'}, {label:'Effect', value:'helped build a mass literacy market'} ] },
+  { id: 'mona-lisa', title: 'Mona Lisa', creator: 'Leonardo da Vinci, c. 1503', category: 'Painting', year: '1503', accentName: 'pink', rotate: 1.5,
+    paragraph: "Commissioned by a Florentine silk merchant, the portrait stayed with Leonardo and later entered the French royal collection. Its fame — and the economics around it — exploded only after the Louvre put it on public display, turning a private commission into a national and tourist asset.",
+    facts: [ {label:'Commissioned by', value:'Francesco del Giocondo, silk merchant'}, {label:'Owned by', value:'the French state, since 1797'}, {label:'Insured value', value:'considered priceless'} ] },
+  { id: 'nutcracker', title: 'The Nutcracker', creator: 'Tchaikovsky, Mariinsky Theatre, 1892', category: 'Ballet', year: '1892', accentName: 'blue', rotate: 2.5,
+    paragraph: "Commissioned by the Imperial Theatres and coolly received at first, The Nutcracker became a holiday-season fixture only in the mid-20th century. For many ballet companies today, its annual run funds a large share of the yearly budget, subsidizing riskier or less popular productions.",
+    facts: [ {label:'Commissioned by', value:'the Imperial Mariinsky Theatre'}, {label:'Popularized in the West', value:'mid-20th century'}, {label:'Funds today', value:'up to 40% of some companies\u2019 annual budget'} ] },
+  { id: 'pearl-earring', title: 'Girl with a Pearl Earring', creator: 'Johannes Vermeer, c. 1665', category: 'Painting', year: '1665', accentName: 'pink', rotate: -2,
+    paragraph: "This is a 'tronie' — a study of an imagined face, not a commissioned portrait — made to be sold on the open Dutch art market rather than for a specific patron. Vermeer worked in a crowded, competitive market and died in debt despite the fame the painting holds today.",
+    facts: [ {label:'Type', value:'tronie, sold on the open market'}, {label:'Vermeer\u2019s finances', value:'died in debt'}, {label:'Now held at', value:'the Mauritshuis, The Hague'} ] }
+];
+
+const ACCENTS = {
+  blue: { bg: 'oklch(0.85 0.06 235)', deep: 'oklch(0.5 0.09 235)' },
+  pink: { bg: 'oklch(0.87 0.06 350)', deep: 'oklch(0.52 0.09 350)' }
+};
+
+class Component extends DCLogic {
+  state = { selectedId: null };
+
+  renderVals() {
+    const emphasis = this.props.accentEmphasis ?? 'Balanced';
+    const order = emphasis === 'Blue-forward'
+      ? ['blue','blue','blue','pink','blue','pink']
+      : emphasis === 'Pink-forward'
+      ? ['pink','pink','pink','blue','pink','blue']
+      : ARTWORKS.map(a => a.accentName);
+
+    const artworks = ARTWORKS.map((a, i) => {
+      const accentName = order[i] ?? a.accentName;
+      const accent = ACCENTS[accentName];
+      return { ...a, accentBg: accent.bg, accentDeep: accent.deep, onSelect: () => this.setState({ selectedId: a.id }) };
+    });
+
+    const selected = artworks.find(a => a.id === this.state.selectedId) || null;
+    const revealEffect = this.props.revealEffect ?? 'Glass pane';
+    const modalAnimation = revealEffect === 'Fade & rise' ? 'fadeUp .3s ease' : 'glassIn .35s cubic-bezier(.2,.8,.2,1)';
+
+    return {
+      artworks,
+      selected,
+      hasSelected: !!selected,
+      modalAnimation,
+      close: () => this.setState({ selectedId: null }),
+      stopClick: (e) => e.stopPropagation()
+    };
+  }
+}
+</script>
+</body>
+</html>
