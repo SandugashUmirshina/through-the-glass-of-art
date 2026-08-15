@@ -8,7 +8,7 @@
 <body>
 <x-dc>
 <helmet>
-<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f0e9dd"/><circle cx="60" cy="60" r="35" fill="#f3c9d8"/><circle cx="140" cy="140" r="35" fill="#bcdcf0"/><text x="100" y="105" font-size="60" text-anchor="middle" fill="#5a4a3a" font-family="serif">A</text></svg></template>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#f0e9dd"></rect><circle cx="60" cy="60" r="35" fill="#f3c9d8"></circle><circle cx="140" cy="140" r="35" fill="#bcdcf0"></circle><text x="100" y="105" font-size="60" text-anchor="middle" fill="#5a4a3a" font-family="serif">A</text></svg></template>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&amp;family=Karla:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 <script src="./image-slot.js"></script>
@@ -45,23 +45,25 @@
     </nav>
   </div>
 
-  <div id="explore" style="max-width:1080px;margin:0 auto;padding:72px 88px 96px 88px">
+  <div id="explore" style="max-width:960px;margin:0 auto;padding:72px 88px 96px 88px">
     <div style="font-family:'Karla',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:oklch(0.5 0.09 235);margin-bottom:10px">Explore</div>
     <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:32px;margin:0 0 12px">Click an artwork to step through the glass</h2>
-    <p style="font-size:16px;line-height:1.6;color:oklch(0.45 0.02 55);margin:0 0 48px;max-width:600px">Every piece below opens onto the world that made it — who paid for it, what it was worth, and what was happening around it.</p>
+    <p style="font-size: 20px; line-height: 1.6; color: oklch(0.52 0.09 350); margin: 0 0 12px; max-width: 600px">Volume I, Standard. <br>Six pieces on money, currency, and the systems behind them.</p>
+    <p style="font-size:13px;font-style:italic;color:oklch(0.55 0.02 55);margin:0 0 48px">Volumes II through VI coming soon.</p>
 
-    <div style="display:flex;flex-wrap:wrap;gap:44px 36px;justify-content:flex-start">
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:40px 28px">
       <sc-for list="{{ artworks }}" as="item" hint-placeholder-count="6">
-        <div onClick="{{ item.onSelect }}" style="width:220px;cursor:pointer;transform:rotate({{ item.rotate }}deg);transition:transform .25s ease" style-hover="width:220px;cursor:pointer;transform:rotate({{ item.rotate }}deg) scale(1.045);transition:transform .25s ease">
-          <div style="width:100%;height:210px;box-shadow:0 10px 22px rgba(60,45,35,0.16)">
+        <div onClick="{{ item.onSelect }}" onClickCapture="{{ item.onSelect }}" style="cursor:pointer;transform:rotate({{ item.rotate }}deg);transition:transform .25s ease" style-hover="cursor:pointer;transform:rotate({{ item.rotate }}deg) scale(1.03);transition:transform .25s ease">
+          <div style="width:100%;height:190px;overflow:hidden;border-radius:6px;box-shadow:0 10px 22px rgba(60,45,35,0.16)">
             <image-slot id="artwork-{{ item.id }}" shape="rounded" radius="6" style="width:100%;height:100%" placeholder="{{ item.title }} — image"></image-slot>
           </div>
           <div style="margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
             <span style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:{{ item.accentBg }};color:{{ item.accentDeep }}">{{ item.category }}</span>
-            <span style="font-size:12px;color:oklch(0.55 0.02 55)">{{ item.year }}</span>
+            <span style="font-size:12px;color:oklch(0.55 0.02 55)">{{ item.region }}, {{ item.year }}</span>
           </div>
           <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:20px;margin-top:6px">{{ item.title }}</div>
-          <div style="font-size:13px;color:oklch(0.5 0.02 55)">{{ item.creator }}</div>
+          <div style="font-size:13px;color:oklch(0.5 0.02 55);margin-bottom:8px">{{ item.creator }}</div>
+          <div style="font-size:13px;line-height:1.5;color:oklch(0.4 0.02 55)">{{ item.hook }}</div>
         </div>
       </sc-for>
     </div>
@@ -111,18 +113,23 @@
 
   <sc-if value="{{ hasSelected }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ close }}" style="position:fixed;inset:0;background:rgba(45,35,30,0.45);backdrop-filter:blur(2px);display:flex;align-items:center;justify-content:center;z-index:50;animation:fadeIn .2s ease;padding:24px">
-      <div onClick="{{ stopClick }}" style="position:relative;width:min(620px,100%);max-height:85vh;overflow:auto;background:oklch(0.975 0.01 75);border-radius:6px;box-shadow:0 30px 70px rgba(30,20,15,0.28),inset 0 0 0 1px rgba(255,255,255,0.7);padding:44px;animation:{{ modalAnimation }}">
-        <button onClick="{{ close }}" style="position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:none;background:{{ selected.accentBg }};color:oklch(0.25 0.02 50);font-size:18px;line-height:1;cursor:pointer">×</button>
-        <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:{{ selected.accentDeep }};margin-bottom:10px">{{ selected.category }} · {{ selected.year }}</div>
+      <div onClick="{{ stopClick }}" style="position:relative;width:min(760px,100%);max-height:88vh;overflow:auto;background:oklch(0.975 0.01 75);border-radius:6px;box-shadow:0 30px 70px rgba(30,20,15,0.28),inset 0 0 0 1px rgba(255,255,255,0.7);padding:44px;animation:{{ modalAnimation }}">
+        <button onClick="{{ close }}" style="position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:none;background:{{ selected.accentBg }};color:oklch(0.25 0.02 50);font-size:18px;line-height:1;cursor:pointer;z-index:1">×</button>
+        <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:{{ selected.accentDeep }};margin-bottom:10px">{{ selected.category }} · {{ selected.region }}, {{ selected.year }}</div>
         <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:34px;margin:0 0 4px">{{ selected.title }}</h2>
-        <div style="font-size:15px;color:oklch(0.48 0.02 55);margin-bottom:22px">{{ selected.creator }}</div>
-        <p style="font-size:16px;line-height:1.7;color:oklch(0.3 0.02 50);margin:0 0 26px">{{ selected.paragraph }}</p>
-        <sc-for list="{{ selected.facts }}" as="fact" hint-placeholder-count="3">
-          <div style="display:flex;justify-content:space-between;gap:20px;padding:11px 0;border-top:1px solid oklch(0.9 0.012 60)">
-            <div style="font-size:14px;color:oklch(0.48 0.02 55)">{{ fact.label }}</div>
-            <div style="font-size:14px;font-weight:600;color:oklch(0.28 0.02 50);text-align:right">{{ fact.value }}</div>
-          </div>
-        </sc-for>
+        <div style="font-size:15px;color:oklch(0.48 0.02 55);margin-bottom:24px">{{ selected.creator }}</div>
+
+        <div style="width:100%;height:340px;box-shadow:0 12px 26px rgba(60,45,35,0.16);border-radius:4px;overflow:hidden;margin-bottom:10px">
+          <image-slot id="artwork-{{ selected.id }}" shape="rect" style="width:100%;height:100%" placeholder="{{ selected.title }}, full image"></image-slot>
+        </div>
+        <p style="font-size:12px;line-height:1.5;color:oklch(0.58 0.015 55);margin:0 0 28px">{{ selected.caption }}</p>
+
+        <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:22px;line-height:1.5;color:oklch(0.32 0.02 50);margin:0 0 30px">{{ selected.hook }}</p>
+        <div style="border-top:1px solid oklch(0.9 0.012 60);padding-top:26px">
+          <sc-for list="{{ selected.writeup }}" as="para" hint-placeholder-count="4">
+            <p style="font-size:15px;line-height:1.75;color:oklch(0.34 0.02 50);margin:0 0 18px">{{ para }}</p>
+          </sc-for>
+        </div>
       </div>
     </div>
   </sc-if>
@@ -132,24 +139,59 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentEmphasis&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;Balanced&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;Balanced&quot;, &quot;Blue-forward&quot;, &quot;Pink-forward&quot;], &quot;section&quot;: &quot;Theme&quot;}, &quot;revealEffect&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;Glass pane&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;options&quot;: [&quot;Glass pane&quot;, &quot;Fade &amp; rise&quot;], &quot;section&quot;: &quot;Interaction&quot;}}">
 const ARTWORKS = [
-  { id: 'starry-night', title: 'The Starry Night', creator: 'Vincent van Gogh, 1889', category: 'Painting', year: '1889', accentName: 'blue', rotate: -2,
-    paragraph: "Van Gogh sold almost nothing in his lifetime and relied on a monthly allowance from his brother Theo, an art dealer. The painting had no market value when it was made — it gained one only decades later, as Post-Impressionism became collectible and museums began competing for major works.",
-    facts: [ {label:'Sold in his lifetime', value:'roughly 1 painting'}, {label:'Supported by', value:'brother Theo van Gogh'}, {label:'Now held at', value:'MoMA, New York'} ] },
-  { id: 'swan-lake', title: 'Swan Lake', creator: 'Tchaikovsky, Bolshoi Theatre, 1877', category: 'Ballet', year: '1877', accentName: 'pink', rotate: 2,
-    paragraph: "Swan Lake was created inside the Imperial Russian court system, where ballet was funded by the state as a mark of national prestige rather than as a commercial venture. Its rocky premiere had little to do with ticket sales — it was about satisfying imperial taste.",
-    facts: [ {label:'Funded by', value:'Imperial Russian court'}, {label:'Premiered at', value:'Bolshoi Theatre, Moscow'}, {label:'Today', value:'one of the most performed ballets worldwide'} ] },
-  { id: 'great-expectations', title: 'Great Expectations', creator: 'Charles Dickens, 1861', category: 'Literature', year: '1861', accentName: 'blue', rotate: -1.5,
-    paragraph: "Dickens published this novel in weekly installments in his own magazine, All the Year Round, to reverse falling sales. Serialization meant he was paid per issue, not per book — an economic model that shaped his pacing, cliffhangers, and the rise of a mass reading public in Victorian England.",
-    facts: [ {label:'Published as', value:'weekly serial installments'}, {label:'Paid by', value:'the issue, not the book'}, {label:'Effect', value:'helped build a mass literacy market'} ] },
-  { id: 'mona-lisa', title: 'Mona Lisa', creator: 'Leonardo da Vinci, c. 1503', category: 'Painting', year: '1503', accentName: 'pink', rotate: 1.5,
-    paragraph: "Commissioned by a Florentine silk merchant, the portrait stayed with Leonardo and later entered the French royal collection. Its fame — and the economics around it — exploded only after the Louvre put it on public display, turning a private commission into a national and tourist asset.",
-    facts: [ {label:'Commissioned by', value:'Francesco del Giocondo, silk merchant'}, {label:'Owned by', value:'the French state, since 1797'}, {label:'Insured value', value:'considered priceless'} ] },
-  { id: 'nutcracker', title: 'The Nutcracker', creator: 'Tchaikovsky, Mariinsky Theatre, 1892', category: 'Ballet', year: '1892', accentName: 'blue', rotate: 2.5,
-    paragraph: "Commissioned by the Imperial Theatres and coolly received at first, The Nutcracker became a holiday-season fixture only in the mid-20th century. For many ballet companies today, its annual run funds a large share of the yearly budget, subsidizing riskier or less popular productions.",
-    facts: [ {label:'Commissioned by', value:'the Imperial Mariinsky Theatre'}, {label:'Popularized in the West', value:'mid-20th century'}, {label:'Funds today', value:'up to 40% of some companies\u2019 annual budget'} ] },
-  { id: 'pearl-earring', title: 'Girl with a Pearl Earring', creator: 'Johannes Vermeer, c. 1665', category: 'Painting', year: '1665', accentName: 'pink', rotate: -2,
-    paragraph: "This is a 'tronie' — a study of an imagined face, not a commissioned portrait — made to be sold on the open Dutch art market rather than for a specific patron. Vermeer worked in a crowded, competitive market and died in debt despite the fame the painting holds today.",
-    facts: [ {label:'Type', value:'tronie, sold on the open market'}, {label:'Vermeer\u2019s finances', value:'died in debt'}, {label:'Now held at', value:'the Mauritshuis, The Hague'} ] }
+  { id: 'qingming', title: 'Along the River During the Qingming Festival', creator: 'Zhang Zeduan', region: 'China', year: 'c. 1085-1145', category: 'Painting', accentName: 'blue', rotate: -2,
+    hook: "The world's first paper currency, jiaozi, visible in a bustling market economy.",
+    caption: "Zhang Zeduan, Along the River During the Qingming Festival, Song Dynasty, Palace Museum, Beijing.",
+    writeup: [
+      "This is a handscroll painting which was created during the Northern Song Dynasty. The painting depicts an ordinary day along the river during the festival outside the capital of Bianjing. Zhang Zeduan depicted this, instead of a court scene or a historical event, because of the daily life which was full of commerce.",
+      "The handscroll shows boats hauling cargo, vendors trading, and moneychangers working in the crowd. When looking close, one can find them exchanging something new for that era: paper currency.",
+      "The Song Dynasty was the first government ever to issue paper currency at scale, known as jiaozi. Before this, money was made of metal, and weight and material were the only value you could verify. With the appearance of paper currency, people began to trust the state's promise instead of metal. That shift from tangible to trust based money is the foundational moment in monetary history, and much of modern economies still run on the same basic concept."
+    ] },
+  { id: 'moneylender', title: 'The Moneylender and His Wife', creator: 'Quentin Matsys', region: 'Antwerp', year: '1514', category: 'Painting', accentName: 'pink', rotate: 2,
+    hook: "Early European currency exchange in a major trading hub.",
+    caption: "Quentin Matsys, The Moneylender and His Wife, 1514, Louvre, Paris.",
+    writeup: [
+      "This is an oil painting created by Quentin Matsys, a Flemish artist based in Antwerp, one of the busiest trading hubs in northern Europe at that time. It demonstrates a moneylender weighing coins and jewels on a small scale, while his wife, who was sitting beside him, gets distracted from her prayer book by the wealth on the table.",
+      "By the early 1500s, Antwerp had become a major banking center for international trade and currency exchange, handling goods and money flowing in from across Europe. Moneylenders and currency changers were extremely important since merchants dealing in different currencies needed someone who could weigh and convert one currency into another before the trade.",
+      "The painting also carries a moral commentary on the period's main issue. The wife's attention drifting from her prayer book to the gold on the table was meant to comment on the growing tension between religious values and the rising culture of wealth and materialistic values in large cities like Antwerp. Scholars point out small details, like a candle and a mirror, as symbols of vanity and the fleeting nature of material wealth.",
+      "Together, the painting captures both the practical mechanics of early currency exchange and the cultural issues that came with it."
+    ] },
+  { id: 'wealth-of-nations', title: 'The Wealth of Nations', creator: 'Adam Smith', region: 'Scotland, Britain', year: '1776', category: 'Literature', accentName: 'blue', rotate: -1.5,
+    hook: "The foundational text behind monetary theory and gold standard era economic thinking.",
+    caption: "Adam Smith, first edition title page, 1776, New York Public Library.",
+    writeup: [
+      "This book, formally titled An Inquiry into the Nature and Causes of the Wealth of Nations, was written by the Scottish philosopher and economist Adam Smith and published in two volumes in 1776. It is widely considered the foundational text of modern economics.",
+      "Smith wrote the book during the Scottish Enlightenment, a period of major advances in philosophy, science, and economic thinking across Scotland. The book challenged the dominant economic system of the era, mercantilism, which held that a nation's wealth was measured by how much gold and silver it stockpiled, often through tightly controlled trade and colonial extraction.",
+      "Smith argued instead that a nation's real wealth came from its productive capacity, the labor, goods, and services it could generate, not from the raw amount of gold sitting in its treasury. He introduced ideas that are still central to economics today, including the division of labor, free markets, and the idea of an invisible hand guiding individual self-interest toward broader social benefit.",
+      "The book's publication coincided almost exactly with the start of the Industrial Revolution and the founding of the United States, both moments when new ideas about production, trade, and national wealth were taking hold. Smith's arguments went on to shape monetary and economic policy for the next century, including the eventual move toward the gold standard as a more formal, rules based approach to national currency."
+    ] },
+  { id: 'swan-princess', title: 'The Swan Princess', creator: 'Mikhail Vrubel', region: 'Russia', year: '1900', category: 'Painting', accentName: 'pink', rotate: 1.5,
+    hook: "Painted five years after Swan Lake's Imperial Mariinsky revival, from the same world of Imperial Russian arts patronage tied to the 1897 gold standard.",
+    caption: "Mikhail Vrubel, The Swan Princess, 1900, Tretyakov Gallery, Moscow. Not a depiction of Swan Lake itself, a companion piece from the same Imperial theatrical era.",
+    writeup: [
+      "This is an oil painting created by Mikhail Vrubel, a Russian Symbolist artist, in 1900. It shows a swan maiden with large, jewel-like eyes, based on a character from Rimsky-Korsakov's opera The Tale of Tsar Saltan, which came from a Pushkin fairy tale. Vrubel designed the sets and costumes for the opera, and his wife played the Swan Princess on stage.",
+      "This painting is not a depiction of Swan Lake, but it comes from the same world of Imperial Russian theater. Just five years earlier, in 1895, the well known revival of Swan Lake premiered at the Imperial Mariinsky Theatre in St. Petersburg, funded by the Imperial Treasury under Tsar Nicholas II.",
+      "That same Treasury was preparing for a major economic reform. In 1897, under Finance Minister Sergei Witte, Russia adopted the gold standard, tying the ruble to a fixed amount of gold. This was meant to stabilize the currency and bring Russia further into the global financial system.",
+      "Imperial arts funding, including productions like Swan Lake and Vrubel's opera work, existed inside this same financial world, an empire spending heavily on culture while redefining its own currency at the same time."
+    ] },
+  { id: 'tulip-satire', title: 'Satire on Tulip Mania', creator: 'Jan Brueghel the Younger', region: 'Antwerp', year: 'c. 1640', category: 'Painting', accentName: 'blue', rotate: 2.5,
+    hook: "Speculators reimagined as monkeys, a satire of history's first recorded speculative financial bubble.",
+    caption: "Jan Brueghel the Younger, Satire on Tulip Mania, c. 1640.",
+    writeup: [
+      "This painting was created by the Flemish artist Jan Brueghel the Younger around 1640, a few years after one of the most famous financial bubbles in history. It depicts a scene of well dressed monkeys engaging in the buying and selling of tulip bulbs, weighing bulbs on scales and negotiating deals. It was painted with the exaggerated detail of human high society. The painting refers to Tulip Mania, a period in the Dutch Republic during the 1630s when prices for tulip bulbs rose to extraordinary levels.",
+      "At the height of the frenzy, a single rare bulb could sell for more than ten times the annual wage of a skilled worker. Buyers and sellers speculated on bulb prices the way people speculate on stocks or property today, driven less by the value of the flower itself and more by the belief that prices would keep climbing.",
+      "In February 1637, the market collapsed almost overnight. Prices crashed, contracts became worthless, and many speculators were left in serious debt. Tulip Mania is now considered the first recorded speculative bubble in economic history, a case study still referenced whenever markets show the same pattern of runaway pricing detached from real value.",
+      "By depicting the speculators as monkeys instead of people, Brueghel mocked the absurdity of the frenzy. The painting captures the same behavior economists still study today, the shift from rational trading to collective irrational excitement, and the painful reckoning that usually follows."
+    ] },
+  { id: 'aida', title: 'Aida', creator: 'Giuseppe Verdi', region: 'Cairo, Egypt', year: '1871', category: 'Opera', accentName: 'pink', rotate: -1.5,
+    hook: "Commissioned by Egypt's ruler to project modernity and attract foreign investment after the Suez Canal opened, the same ambitious spending that helped push Egypt into crushing debt within a few years.",
+    caption: "Philippe Chaperon, set design for Act 1 of Aida, 1871.",
+    writeup: [
+      "This opera was composed by Giuseppe Verdi and premiered at the Khedivial Opera House in Cairo in December 1871. It was commissioned by Egypt's ruler, Khedive Ismail Pasha, as part of an effort to modernize the country and present it to the world.",
+      "The commission came during a period of heavy infrastructure spending in Egypt, most notably the Suez Canal, which had opened in 1869. Ismail Pasha saw major cultural projects, including a new opera house built for European style productions, as another way to attract foreign investment and present Egypt as a modern nation. He paid Verdi 150,000 francs for the commission.",
+      "This debt financed spending had real consequences. Within a few years of Aida's premiere, Egypt's foreign debt became unmanageable. By the mid 1870s, the country sold its shares in the Suez Canal to Britain, and by 1876, an international debt commission representing European creditors took direct control of Egyptian state finances. British military occupation followed in 1882.",
+      "Aida remains one of the most performed operas in the world today. Its origin is a reminder that grand cultural projects rarely stand apart from the financial decisions surrounding them, and debt financed ambition, whether in opera houses or canals, carries real economic consequences."
+    ] }
 ];
 
 const ACCENTS = {
@@ -163,9 +205,9 @@ class Component extends DCLogic {
   renderVals() {
     const emphasis = this.props.accentEmphasis ?? 'Balanced';
     const order = emphasis === 'Blue-forward'
-      ? ['blue','blue','blue','pink','blue','pink']
+      ? ['blue','blue','blue','pink','blue','blue']
       : emphasis === 'Pink-forward'
-      ? ['pink','pink','pink','blue','pink','blue']
+      ? ['pink','pink','pink','blue','pink','pink']
       : ARTWORKS.map(a => a.accentName);
 
     const artworks = ARTWORKS.map((a, i) => {
