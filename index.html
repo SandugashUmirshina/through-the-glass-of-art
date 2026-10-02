@@ -49,7 +49,7 @@
     <div style="font-family:'Karla',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:oklch(0.5 0.09 235);margin-bottom:10px">Explore</div>
     <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:32px;margin:0 0 12px">Click an artwork to step through the glass</h2>
     <p style="font-size: 20px; line-height: 1.6; color: oklch(0.52 0.09 350); margin: 0 0 12px; max-width: 600px">Volume I, Standard. <br>Six pieces on money, currency, and the systems behind them.</p>
-    <p style="font-size:13px;font-style:italic;color:oklch(0.55 0.02 55);margin:0 0 48px">Volumes II through VI coming soon.</p>
+    <p style="font-size:13px;font-style:italic;color:oklch(0.55 0.02 55);margin:0 0 48px">Volumes III through VI coming soon.</p>
 
     <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:40px 28px">
       <sc-for list="{{ artworks }}" as="item" hint-placeholder-count="6">
@@ -66,6 +66,26 @@
           <div style="font-size:13px;line-height:1.5;color:oklch(0.4 0.02 55)">{{ item.hook }}</div>
         </div>
       </sc-for>
+    </div>
+
+    <div id="volume-2" style="margin-top:96px;padding-top:56px;border-top:1px solid oklch(0.9 0.012 60)">
+      <p style="font-size: 20px; line-height: 1.6; color: oklch(0.5 0.09 235); margin: 0 0 48px; max-width: 600px">Volume II, Labor and Industry. <br>Six pieces on work, class, and the systems built on them.</p>
+      <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:40px 28px">
+        <sc-for list="{{ artworks2 }}" as="item" hint-placeholder-count="6">
+          <div onClick="{{ item.onSelect }}" onClickCapture="{{ item.onSelect }}" style="cursor:pointer;transform:rotate({{ item.rotate }}deg);transition:transform .25s ease" style-hover="cursor:pointer;transform:rotate({{ item.rotate }}deg) scale(1.03);transition:transform .25s ease">
+            <div style="width:100%;height:190px;overflow:hidden;border-radius:6px;box-shadow:0 10px 22px rgba(60,45,35,0.16)">
+              <image-slot id="artwork-{{ item.id }}" shape="rounded" radius="6" style="width:100%;height:100%" placeholder="{{ item.title }} image"></image-slot>
+            </div>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:{{ item.accentBg }};color:{{ item.accentDeep }}">{{ item.category }}</span>
+              <span style="font-size:12px;color:oklch(0.55 0.02 55)">{{ item.region }}, {{ item.year }}</span>
+            </div>
+            <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:20px;margin-top:6px">{{ item.title }}</div>
+            <div style="font-size:13px;color:oklch(0.5 0.02 55);margin-bottom:8px">{{ item.creator }}</div>
+            <div style="font-size:13px;line-height:1.5;color:oklch(0.4 0.02 55)">{{ item.hook }}</div>
+          </div>
+        </sc-for>
+      </div>
     </div>
   </div>
 
@@ -129,6 +149,10 @@
           <sc-for list="{{ selected.writeup }}" as="para" hint-placeholder-count="4">
             <p style="font-size:15px;line-height:1.75;color:oklch(0.34 0.02 50);margin:0 0 18px">{{ para }}</p>
           </sc-for>
+          <sc-if value="{{ selected.noWriteup }}" hint-placeholder-val="{{ false }}">
+            <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:oklch(0.55 0.02 55);margin-bottom:10px">Full write-up coming soon</div>
+            <p style="font-size:14px;line-height:1.7;color:oklch(0.5 0.02 55);margin:0">The economic and financial history behind this piece is on its way.</p>
+          </sc-if>
         </div>
       </div>
     </div>
@@ -199,6 +223,57 @@ const ACCENTS = {
   pink: { bg: 'oklch(0.87 0.06 350)', deep: 'oklch(0.52 0.09 350)' }
 };
 
+const ARTWORKS_V2 = [
+  { id: 'gleaners', title: 'The Gleaners', creator: 'Jean-Francois Millet', region: 'France', year: '1857', category: 'Painting', accentName: 'pink', rotate: -2,
+    hook: "Painted as France industrialized, capturing the rural wage labor and gleaning rights that industrialization was already erasing.",
+    caption: "Jean-Francois Millet, The Gleaners, 1857, Musee d'Orsay, Paris.",
+    writeup: [
+      "This oil painting was completed by Jean-Francois Millet in 1857 and shows three peasant women bent over a field, collecting leftover grain after the main harvest had already been taken away. Gleaning was an old legal right that let the poorest rural workers gather whatever the landowner's harvesters had missed or dropped.",
+      "By the time Millet painted this scene, France was industrializing fast, and factory wage labor was starting to pull people away from this kind of subsistence farming. Many landowners also began restricting or ending gleaning rights around this period, seeing them as inefficient or as a drain on profit. What looks like a quiet rural moment was actually becoming a disappearing economic practice.",
+      "The painting was criticized when it was first shown. Wealthy audiences at the time read it as an uncomfortable reminder of class divisions, since Millet painted these women with the same scale and seriousness usually reserved for historical or religious figures."
+    ] },
+  { id: 'work', title: 'Work', creator: 'Ford Madox Brown', region: 'Britain', year: '1852 to 1865', category: 'Painting', accentName: 'blue', rotate: 2,
+    hook: "A Victorian street scene placing navvies, the unemployed, and the wealthy side by side as a direct commentary on industrial era class and labor.",
+    caption: "Ford Madox Brown, Work, 1852 to 1865, Manchester Art Gallery.",
+    writeup: [
+      "This painting took Ford Madox Brown thirteen years to finish, and it shows a street scene in Victorian London packed with people from very different social positions. In the center, a group of navvies dig up the road, doing hard physical labor in full view of everyone passing by.",
+      "Around them, Brown placed other figures meant to represent different relationships to work. Unemployed men rest in the shade nearby. Wealthy onlookers pass by without lifting anything. Brown also included real historical figures in the painting, like the writer Thomas Carlyle, who had written about the moral importance of labor and the harsh conditions of industrial factory work.",
+      "Many of the laborers in the scene were Irish immigrants, who had come to Britain in large numbers after famine and economic hardship pushed them out of Ireland. Brown wanted the painting to show the full range of a society built on industrial labor, who actually does the physical work, who benefits from it, and who gets left out of it entirely."
+    ] },
+  { id: 'north-and-south', title: 'North and South', creator: 'Elizabeth Gaskell', region: 'Britain', year: '1854 to 1855', category: 'Literature', accentName: 'pink', rotate: -1.5,
+    hook: "One of the earliest novels to dramatize a real factory strike, following a woman who moves from the rural south into an industrial mill town.",
+    caption: "George du Maurier, illustration for North and South, 1873 edition.",
+    writeup: [
+      "This novel follows Margaret Hale, a young woman who moves with her family from the quiet rural south of England to a fictional industrial town called Milton in the north. The shift is jarring for her, she goes from a slow farming community to a place entirely built around cotton mills and factory labor.",
+      "In Milton, Margaret becomes close to a mill owner named John Thornton, but she also witnesses a real wage strike from the workers' side, something very few novels at the time showed with any sympathy. Gaskell based much of this on actual labor unrest she had seen in industrial English cities during this period.",
+      "The novel was originally published in weekly installments in a magazine edited by Charles Dickens, who insisted on the title North and South instead of Gaskell's original choice, which was simply the main character's name. The title points to the central conflict in the book, not just a divide between two regions, but between two completely different ways an economy could be organized."
+    ] },
+  { id: 'carmen', title: 'Carmen', creator: 'Georges Bizet', region: 'Spain', year: '1875', category: 'Opera', accentName: 'blue', rotate: 1.5,
+    hook: "Set entirely around a real 19th century tobacco factory in Seville, opening with women workers leaving at the end of a shift.",
+    caption: "Illustration of Carmen, Journal Amusant, 1875.",
+    writeup: [
+      "This opera opens outside a real cigarette factory in Seville, where soldiers wait as the female workers leave at the end of their shift. Carmen, the main character, works inside this factory as a cigarette maker before the opera's main story even begins.",
+      "The factory shown in the opera was based on an actual 19th century tobacco factory in Seville, one of the largest industrial buildings in Spain at the time. It employed thousands of workers, many of them women, who rolled cigars and cigarettes by hand for long hours. Being a cigarette factory worker was one of the few paid jobs available to working class women in Spain during this period.",
+      "When Carmen premiered in Paris in 1875, audiences and critics reacted badly to it. They were used to operas about nobility and historical figures, not smugglers, factory workers, and fortune tellers. Bizet died just a few months after the premiere, never getting to see Carmen become one of the most performed operas in the world."
+    ] },
+  { id: 'grande-jatte', title: 'A Sunday on La Grande Jatte', creator: 'Georges Seurat', region: 'France', year: '1884 to 1886', category: 'Painting', accentName: 'pink', rotate: 2.5,
+    hook: "One of the most famous paintings in Western art, and almost nobody notices the factories and railway bridges in the background, quietly documenting the brand new invention of weekend leisure for industrial workers.",
+    caption: "Georges Seurat, A Sunday on La Grande Jatte, 1884 to 1886, Art Institute of Chicago.",
+    writeup: [
+      "This painting shows a crowd of people relaxing in a park on an island in the Seine, painted entirely using small dots of color placed next to each other, a technique Seurat helped invent called pointillism. It took him close to two years to finish, including dozens of smaller studies beforehand.",
+      "Look closely at the background and you can see factory buildings and a railway bridge across the river. This detail is easy to miss, but it matters. Before industrialization created wage labor with fixed hours, most people did not have organized free time like this at all. The relaxed Sunday afternoon Seurat painted was a genuinely new kind of experience, made possible by the same industrial economy quietly sitting in the background of the scene.",
+      "The painting is now one of the most recognized artworks in the world and has been referenced and parodied constantly in film, television, and advertising, though the industrial detail that explains why these people even have a Sunday off is rarely the part anyone talks about."
+    ] },
+  { id: 'american-gothic', title: 'American Gothic', creator: 'Grant Wood', region: 'United States', year: '1930', category: 'Painting', accentName: 'blue', rotate: -1.5,
+    hook: "Painted and exhibited just as the Great Depression and the Dust Bowl were devastating American farm economies, sparking an argument that still continues over whether it is a tribute to rural resilience or a quiet satire of it.",
+    caption: "Grant Wood, American Gothic, 1930, Art Institute of Chicago.",
+    writeup: [
+      "This painting shows a farmer holding a pitchfork standing next to a woman, usually assumed to be his wife or daughter, in front of a small farmhouse. Grant Wood painted it in 1930 and based the house on a real building he saw in Eldon, Iowa.",
+      "Wood painted this right as the Great Depression and the Dust Bowl were devastating American farm economies. He said he meant it as a positive statement about rural resilience, a reassuring image at a moment of real economic collapse. Many viewers at the time read it the opposite way, as a satire of a rigid, old fashioned way of life that was failing to keep up with a changing country.",
+      "The argument over what the painting actually means has never really settled, and that argument started almost the moment it was first exhibited in Chicago in 1930."
+    ] }
+];
+
 class Component extends DCLogic {
   state = { selectedId: null };
 
@@ -216,12 +291,19 @@ class Component extends DCLogic {
       return { ...a, accentBg: accent.bg, accentDeep: accent.deep, onSelect: () => this.setState({ selectedId: a.id }) };
     });
 
-    const selected = artworks.find(a => a.id === this.state.selectedId) || null;
+    const artworks2 = ARTWORKS_V2.map(a => {
+      const accent = ACCENTS[a.accentName];
+      return { ...a, accentBg: accent.bg, accentDeep: accent.deep, onSelect: () => this.setState({ selectedId: a.id }) };
+    });
+
+    const found = [...artworks, ...artworks2].find(a => a.id === this.state.selectedId);
+    const selected = found ? { ...found, writeup: found.writeup || [], noWriteup: !found.writeup } : null;
     const revealEffect = this.props.revealEffect ?? 'Glass pane';
     const modalAnimation = revealEffect === 'Fade & rise' ? 'fadeUp .3s ease' : 'glassIn .35s cubic-bezier(.2,.8,.2,1)';
 
     return {
       artworks,
+      artworks2,
       selected,
       hasSelected: !!selected,
       modalAnimation,
