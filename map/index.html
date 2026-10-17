@@ -7,40 +7,28 @@
 <title>Art and Money Map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Karla:wght@400;500;600;700&display=swap">
 <style>
 /* Plan. Color: ink-blue sea, pale land, gold-leaf pins (patron's coin), ledger rules.
-   Type: Instrument Serif for titles, Hanken Grotesk for reading.
+   Type and color match the main site: Cormorant Garamond titles, Karla text, cream paper, blue and rose accents.
    Layout: map left, ledger-style panel right; panel stacks under the map on phones.
    One bold thing: every entry is a ledger of who paid and what money looked like. */
 :root {
-  --bg: #EDF1F0;
-  --ocean: #CFE0E6;
-  --land: #FAFBF9;
-  --land-line: #A9BEC6;
-  --land-hit: #F2E2B4;
-  --grid: #B9CDD4;
-  --ink: #12252D;
-  --muted: #4B6169;
+  --bg: #F6F1E8;
+  --ocean: #D9E8F1;
+  --land: #FFFDF8;
+  --land-line: #B7C9D6;
+  --land-hit: #F4D8E3;
+  --grid: #C6D9E4;
+  --ink: #3A3027;
+  --muted: #6B5F55;
   --gold: #9A6A12;
   --gold-fill: #E9BE55;
-  --panel: #FFFFFF;
-  --rule: #C8D6DA;
-  --focus: #0B5CAD;
-  --font-display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
-  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0B1920; --ocean: #0F2531; --land: #1C3745; --land-hit: #4A4A32; --land-line: #2E5061; --grid: #1A3341;
-    --ink: #E8EFF1; --muted: #9DB3BB; --gold: #E6B650; --gold-fill: #E6B650; --panel: #11262F;
-    --rule: #2A4350; --focus: #8CC4FF; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0B1920; --ocean: #0F2531; --land: #1C3745; --land-hit: #4A4A32; --land-line: #2E5061; --grid: #1A3341;
-  --ink: #E8EFF1; --muted: #9DB3BB; --gold: #E6B650; --gold-fill: #E6B650; --panel: #11262F;
-  --rule: #2A4350; --focus: #8CC4FF; color-scheme: dark;
+  --panel: #FFFDF8;
+  --rule: #E6DDD0;
+  --focus: #3F7BA3;
+  --font-display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --font-body: "Karla", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 * { box-sizing: border-box; }
 html { background: var(--bg); }
@@ -53,8 +41,11 @@ body {
 }
 .wrap { max-width: 1180px; margin: 0 auto; }
 header { margin-bottom: 18px; max-width: 62ch; }
-h1 { font: 400 clamp(2rem, 5vw, 3rem)/1.05 var(--font-display); margin: 0 0 8px; text-wrap: balance; letter-spacing: -0.01em; }
+h1 { font: italic 600 clamp(2rem, 5vw, 3rem)/1.05 var(--font-display); margin: 0 0 8px; text-wrap: balance; letter-spacing: -0.01em; }
 header p { margin: 0; color: var(--muted); }
+.back { display: inline-block; margin-bottom: 14px; font-weight: 600; font-size: 15px; color: var(--focus); text-decoration: none; border-bottom: 2px solid #D5E4EE; padding-bottom: 2px; }
+.embed header, .embed .back { display: none; }
+.embed body { padding-block: 0; padding-inline: 0; }
 .stage { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 20px; align-items: start; }
 .map { position: relative; background: var(--ocean); border-radius: 6px; overflow: hidden; }
 .map svg { display: block; width: 100%; height: auto; touch-action: pan-y; cursor: grab; }
@@ -111,8 +102,10 @@ a { color: var(--focus); }
 </style>
 </head>
 <body>
+<script>if(/[?&]embed=1/.test(location.search))document.documentElement.classList.add("embed");</script>
 <div class="wrap">
   <header>
+    <a class="back" href="../">&larr; Through the Glass of Art</a><br>
     <h1>Art and Money Map</h1>
     <p>Pick a coin on the map to see who paid for a work of art and what money looked like where and when it was made.</p>
   </header>
