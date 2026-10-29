@@ -10,7 +10,9 @@ This project connects art history to economics, something rarely taught together
 
 **Volume I: Standard** — Monetary policy and currency, six pieces from Song Dynasty China to the Dutch tulip bubble.
 
-**Volume II: Labor and Industry** — Work, class, and industrialization, currently in progress.
+**Volume II: Labor and Industry** — Work, class, and industrialization.
+
+**Volume III: Trade, Silk Road and Empire** — Trade routes, trading companies, and treaty ports, six pieces from Marco Polo to Madama Butterfly.
 
 Built for students internationally, with a focus on underrepresented communities who often lack access to resources like this. No sign-up, no ads, no cost.
 

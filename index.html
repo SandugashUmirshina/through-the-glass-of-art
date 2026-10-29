@@ -51,7 +51,7 @@
     <div style="font-family:'Karla',sans-serif;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:oklch(0.5 0.09 235);margin-bottom:10px">Explore</div>
     <h2 style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:32px;margin:0 0 12px">Click an artwork to step through the glass</h2>
     <p style="font-size: 20px; line-height: 1.6; color: oklch(0.52 0.09 350); margin: 0 0 12px; max-width: 600px">Volume I, Standard. <br>Six pieces on money, currency, and the systems behind them.</p>
-    <p style="font-size:13px;font-style:italic;color:oklch(0.55 0.02 55);margin:0 0 48px">Volumes III through VI coming soon.</p>
+    <p style="font-size:13px;font-style:italic;color:oklch(0.55 0.02 55);margin:0 0 48px">Volumes IV through VI coming soon.</p>
 
     <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:40px 28px">
       <sc-for list="{{ artworks }}" as="item" hint-placeholder-count="6">
@@ -74,6 +74,26 @@
       <p style="font-size: 20px; line-height: 1.6; color: oklch(0.5 0.09 235); margin: 0 0 48px; max-width: 600px">Volume II, Labor and Industry. <br>Six pieces on work, class, and the systems built on them.</p>
       <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:40px 28px">
         <sc-for list="{{ artworks2 }}" as="item" hint-placeholder-count="6">
+          <div onClick="{{ item.onSelect }}" onClickCapture="{{ item.onSelect }}" style="cursor:pointer;transform:rotate({{ item.rotate }}deg);transition:transform .25s ease" style-hover="cursor:pointer;transform:rotate({{ item.rotate }}deg) scale(1.03);transition:transform .25s ease">
+            <div style="width:100%;height:190px;overflow:hidden;border-radius:6px;box-shadow:0 10px 22px rgba(60,45,35,0.16)">
+              <image-slot id="artwork-{{ item.id }}" shape="rounded" radius="6" style="width:100%;height:100%" placeholder="{{ item.title }} image"></image-slot>
+            </div>
+            <div style="margin-top:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <span style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:{{ item.accentBg }};color:{{ item.accentDeep }}">{{ item.category }}</span>
+              <span style="font-size:12px;color:oklch(0.55 0.02 55)">{{ item.region }}, {{ item.year }}</span>
+            </div>
+            <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:600;font-size:20px;margin-top:6px">{{ item.title }}</div>
+            <div style="font-size:13px;color:oklch(0.5 0.02 55);margin-bottom:8px">{{ item.creator }}</div>
+            <div style="font-size:13px;line-height:1.5;color:oklch(0.4 0.02 55)">{{ item.hook }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="volume-3" style="margin-top:96px;padding-top:56px;border-top:1px solid oklch(0.9 0.012 60)">
+      <p style="font-size: 20px; line-height: 1.6; color: oklch(0.52 0.09 350); margin: 0 0 48px; max-width: 600px">Volume III, Trade, Silk Road and Empire. <br>Six pieces on trade routes, trading companies, and the systems built to move goods and wealth across the world.</p>
+      <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:40px 28px">
+        <sc-for list="{{ artworks3 }}" as="item" hint-placeholder-count="6">
           <div onClick="{{ item.onSelect }}" onClickCapture="{{ item.onSelect }}" style="cursor:pointer;transform:rotate({{ item.rotate }}deg);transition:transform .25s ease" style-hover="cursor:pointer;transform:rotate({{ item.rotate }}deg) scale(1.03);transition:transform .25s ease">
             <div style="width:100%;height:190px;overflow:hidden;border-radius:6px;box-shadow:0 10px 22px rgba(60,45,35,0.16)">
               <image-slot id="artwork-{{ item.id }}" shape="rounded" radius="6" style="width:100%;height:100%" placeholder="{{ item.title }} image"></image-slot>
@@ -284,6 +304,63 @@ const ARTWORKS_V2 = [
     ] }
 ];
 
+const ARTWORKS_V3 = [
+  { id: 'marco-polo', title: 'The Travels of Marco Polo', creator: 'Marco Polo and Rustichello of Pisa', region: 'Venice and the Silk Road', year: 'c. 1298', category: 'Literature', accentName: 'blue', rotate: -2,
+    hook: "A Venetian merchant's account of 24 years in Asia, dictated in a prison cell, that showed Europe how large Asian trade really was.",
+    caption: "Illuminated manuscript of The Travels of Marco Polo, 15th century.",
+    writeup: [
+      "Marco Polo was born in 1254 into a wealthy Venetian merchant family. In 1271, at age 17, he set out with his father Niccolo and his uncle Maffeo on an overland journey of about three and a half years along trade routes that included the Silk Road, passing through Persia and Samarkand before reaching the summer capital of Kublai Khan in 1275.",
+      "Kublai Khan, ruler of the Mongol Yuan dynasty, employed Marco as a roving envoy, and the Polos stayed in Asia for about 17 years. They returned to Venice in 1295. Not long after, Marco was captured during Venice's war with Genoa, and in prison he dictated his story to a fellow prisoner, Rustichello of Pisa. The book, known in Italian as Il Milione, was circulating by around 1298.",
+      "The book reads partly like a merchant's notebook. It describes silk and gold-threaded fabrics and pearl diving in Baghdad, dates in Basra, and indigo production in India. It also explains Chinese paper currency to European readers, including the official seals that gave the notes their authority and the punishments for counterfeiting. Volume I's first piece traces paper money to Song China, and under the Mongol Yuan dynasty it had become a currency used across a huge empire.",
+      "Historians often credit the Mongol Empire, which controlled much of the route in this period, with making long-distance travel and trade safer. Scholars also debate how reliable Polo's account is. The book mixes his own observations with secondhand reports, and some details are exaggerated or left out. Even so, it left Europeans with a lasting picture of Asia as a place of enormous commercial wealth."
+    ] },
+  { id: 'catalan-atlas', title: 'The Catalan Atlas', creator: 'Abraham Cresques (attributed)', region: 'Majorca', year: '1375', category: 'Map', accentName: 'pink', rotate: 2,
+    hook: "A map made for a French king that shows Mali's ruler Mansa Musa on a throne holding gold, a snapshot of how much medieval Europe wanted West African gold.",
+    caption: "Abraham Cresques (attributed), Catalan Atlas, 1375, Bibliotheque nationale de France, Paris. Detail showing Mansa Musa.",
+    writeup: [
+      "The Catalan Atlas is a set of illuminated maps painted on parchment and mounted on six wooden panels. It was completed in 1375 in Majorca and is attributed to Abraham Cresques, a Jewish mapmaker. It is believed to have been made as a gift for King Charles V of France, and it is now held by the Bibliotheque nationale de France in Paris.",
+      "On its second panel, the atlas shows Mansa Musa, the ruler of the Mali Empire, seated on a throne and holding a golden orb. The caption calls him the richest and most distinguished ruler of the region because of the great quantity of gold in his lands. The map was drawn about fifty years after his famous pilgrimage to Mecca in 1324.",
+      "Mali grew wealthy by controlling trade across the Sahara. Salt came south from the north, while gold and ivory came north from the south, and Mali taxed that exchange and controlled gold and copper mines. Accounts of Musa's 1324 stop in Cairo say his spending there was so large that it lowered the value of gold. The exact figures come from later sources and are uncertain, but the story shows how far the reputation of Mali's gold traveled.",
+      "Majorca was a trading hub in the Mediterranean, and a map like this was valuable because merchants and kings wanted to know where wealth came from. The atlas shows that West African gold had reached the European imagination, and that the trade routes crossing the Sahara were already connected to the markets of the Mediterranean."
+    ] },
+  { id: 'merchant-of-venice', title: 'The Merchant of Venice', creator: 'William Shakespeare', region: 'England, set in Venice', year: 'c. 1596 to 1598', category: 'Literature', accentName: 'blue', rotate: -1.5,
+    hook: "A play about a merchant whose whole fortune is on ships at sea, and the loan that shows how risky long-distance trade was.",
+    caption: "Title page of the first quarto of The Merchant of Venice, 1600.",
+    writeup: [
+      "Shakespeare wrote this play between about 1596 and 1598. It was entered in the Stationers' Register, the official record of English publications, on 22 July 1598, and the first printed edition appeared in 1600. The story is set in Venice, a city known for merchants and trade.",
+      "The title character, Antonio, is a merchant whose wealth is in ships and cargo at sea, bound for places including Tripolis, the Indies, Mexico, and England. When his friend Bassanio needs 3,000 ducats, Antonio cannot simply hand it over, because his capital is tied up in voyages. He guarantees a loan from Shylock, a moneylender, with a bond that allows Shylock to take a pound of Antonio's flesh if the loan is not repaid.",
+      "The plot depends on a real economic problem. A merchant could have his entire fortune sitting on ships for months, exposed to storms and piracy, and a single report of lost vessels could make him unable to pay. In the play, Antonio is told his ships are lost, although it is later revealed that three of them returned safely. Only a few years after the play was written, in 1602, the Dutch created the Dutch East India Company, which spread the risk of voyages across many shareholders instead of a single merchant.",
+      "The play also reflects how lending was treated in its time. Antonio lends money without interest, which sets him against Shylock. In Venice, Jewish residents had to live in a ghetto and wear a yellow or red hat in public, and English Jews had been expelled in 1290 and were not permitted to return until 1656. Christian teaching often discouraged lending at interest, which is one reason moneylending was frequently left to minorities. The play is often read as both a story about commerce and a record of the prejudice that shaped it."
+    ] },
+  { id: 'kalf-porcelain', title: 'Still Life with a Chinese Porcelain Jar', creator: 'Willem Kalf', region: 'Dutch Republic', year: '1669', category: 'Painting', accentName: 'pink', rotate: 1.5,
+    hook: "A table of Chinese porcelain, Venetian glass, and an oriental rug, painted in the same year the Dutch East India Company paid out a 40 percent dividend.",
+    caption: "Willem Kalf, Still Life with a Chinese Porcelain Jar, 1669, Indianapolis Museum of Art.",
+    writeup: [
+      "This oil painting by the Dutch artist Willem Kalf shows a table covered with expensive objects: a Chinese porcelain jar, citrus fruit, Venetian glassware, Dutch silver including a platter with a ticking watch on it, and a carelessly crumpled oriental rug over a marble tabletop.",
+      "Nearly everything on the table came from somewhere else. The porcelain came from China, the glass from Venice, the rug from the East, and the citrus from places warmer than the Netherlands. The painting works as a portrait of the Netherlands as a trade center, where goods from several continents ended up on a single dining table.",
+      "Much of that flow depended on the Dutch East India Company, known as the VOC, founded on 20 March 1602 by merging several trading companies. It received a 21-year monopoly on trade east of the Cape of Good Hope. It was one of the first joint-stock companies in the world, and its shares could be bought and sold on open-air markets that grew into the Amsterdam Stock Exchange. Spices were its core business, but it also shipped silk, porcelain, tea, coffee, and textiles.",
+      "The year Kalf painted this, 1669, the VOC reached a payout of 40 percent of the original investment. Its annual dividends averaged about 18 percent for almost 200 years. That wealth was backed by force, because by 1669 the company had over 150 merchant ships, 40 warships, 50,000 employees, and a private army of 10,000 soldiers. Still lifes like this one are often read as displays of wealth and also as reminders that time and wealth are fleeting, which is a common reading of the ticking watch."
+    ] },
+  { id: 'slave-ship', title: 'The Slave Ship', creator: 'J.M.W. Turner', region: 'Britain', year: '1840', category: 'Painting', accentName: 'blue', rotate: 2.5,
+    hook: "A storm at sea painted over a real insurance case, in which more than 130 enslaved people were killed and the ship's owners then filed a claim.",
+    caption: "J.M.W. Turner, The Slave Ship, 1840, Museum of Fine Arts, Boston.",
+    writeup: [
+      "J.M.W. Turner exhibited this oil painting at the Royal Academy in London in 1840. It shows a ship in a violent red sunset and a coming storm, while the bodies and shackled limbs of enslaved people sink into the water in the foreground. Its full title refers to slavers throwing overboard the dead and dying.",
+      "The painting was inspired by the Zong massacre. The ship Zong left Accra on 18 August 1781 with 442 enslaved Africans. Starting on 29 November, the crew threw more than 130 of them overboard, saying drinking water was running low. The ship reached Jamaica on 22 December with 208 survivors, and it still had water on board.",
+      "This became a financial case as well as a human one. The owners' insurance covered each enslaved person at 30 pounds, and the owners filed a claim. In the 1783 case Gregson v Gilbert, a jury first found for the owners. At a later hearing, new evidence showed that rain had fallen during the killings, and Lord Chief Justice Mansfield ordered a new trial. No record shows a retrial took place, and no crew member was prosecuted for murder. The case exposed that the slave trade was being financed and insured like any other cargo.",
+      "The case helped drive the abolition movement. The Society for the Abolition of the Slave Trade was founded in 1787, Parliament barred insurers from reimbursing owners for people thrown overboard in 1791, and Britain abolished its part in the Atlantic slave trade in 1807. Turner's painting appeared in 1840, the same year two international anti-slavery conventions met in London. The critic John Ruskin later owned it, and it was bought at an 1876 auction and has been shown at the Museum of Fine Arts, Boston."
+    ] },
+  { id: 'madama-butterfly', title: 'Madama Butterfly', creator: 'Giacomo Puccini', region: 'Italy, set in Nagasaki', year: '1904', category: 'Opera', accentName: 'pink', rotate: -1.5,
+    hook: "An opera set in a Japanese treaty port, in a world created by trade treaties that gave foreigners special privileges in Japan.",
+    caption: "Adolfo Hohenstein, poster for the first production of Madama Butterfly, 1904.",
+    writeup: [
+      "Madama Butterfly premiered at La Scala in Milan on 17 February 1904, with music by Giacomo Puccini and a libretto by Luigi Illica and Giuseppe Giacosa. It is based on a play by David Belasco, which was itself taken from a short story by John Luther Long. The first version had two acts, and a revised three-act version reached the stage in Brescia on 28 May 1904.",
+      "The story takes place in a house overlooking the harbor of Nagasaki. An American naval lieutenant, B.F. Pinkerton, marries Cio-Cio-San, a young geisha. Pinkerton treats the marriage as temporary, while she believes it is real. The setting matters economically, because Nagasaki was one of the ports opened to foreign trade by treaties in the 1850s.",
+      "An 1855 treaty with Russia opened Nagasaki as a port and gave foreigners extraterritoriality, meaning they were not subject to Japanese law. The Ansei Treaties of 1859, including the Harris Treaty with the United States, required ports to open at once and set generally unequal trade terms. A foreign settlement was built at Nagasaki starting in 1860, and it saw Japan's first international telegraph and its first steam locomotive.",
+      "Japan worked for decades to undo these terms. The old treaties were abolished by 1894, new ones took effect in 1899 when the settlement returned fully to Japanese control, and control of tariffs returned after a 1911 treaty with the United States. Many readers see the unequal marriage in the opera as a reflection of this unequal arrangement between nations, with one side holding the power to leave and the other left to bear the consequences."
+    ] }
+];
+
 class Component extends DCLogic {
   state = { selectedId: null };
 
@@ -306,7 +383,12 @@ class Component extends DCLogic {
       return { ...a, accentBg: accent.bg, accentDeep: accent.deep, onSelect: () => this.setState({ selectedId: a.id }) };
     });
 
-    const found = [...artworks, ...artworks2].find(a => a.id === this.state.selectedId);
+    const artworks3 = ARTWORKS_V3.map(a => {
+      const accent = ACCENTS[a.accentName];
+      return { ...a, accentBg: accent.bg, accentDeep: accent.deep, onSelect: () => this.setState({ selectedId: a.id }) };
+    });
+
+    const found = [...artworks, ...artworks2, ...artworks3].find(a => a.id === this.state.selectedId);
     const selected = found ? { ...found, writeup: found.writeup || [], noWriteup: !found.writeup } : null;
     const revealEffect = this.props.revealEffect ?? 'Glass pane';
     const modalAnimation = revealEffect === 'Fade & rise' ? 'fadeUp .3s ease' : 'glassIn .35s cubic-bezier(.2,.8,.2,1)';
@@ -314,6 +396,7 @@ class Component extends DCLogic {
     return {
       artworks,
       artworks2,
+      artworks3,
       selected,
       hasSelected: !!selected,
       modalAnimation,
