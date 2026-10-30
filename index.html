@@ -179,6 +179,12 @@
           <sc-for list="{{ selected.writeup }}" as="para" hint-placeholder-count="4">
             <p style="font-size:15px;line-height:1.75;color:oklch(0.34 0.02 50);margin:0 0 18px">{{ para }}</p>
           </sc-for>
+          <sc-if value="{{ selected.hasToday }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:8px;padding:20px 22px;border-radius:6px;background:{{ selected.accentBg }}">
+              <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:{{ selected.accentDeep }};margin-bottom:8px">Today</div>
+              <p style="font-size:15px;line-height:1.7;color:oklch(0.28 0.02 50);margin:0">{{ selected.today }}</p>
+            </div>
+          </sc-if>
           <sc-if value="{{ selected.noWriteup }}" hint-placeholder-val="{{ false }}">
             <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;color:oklch(0.55 0.02 55);margin-bottom:10px">Full write-up coming soon</div>
             <p style="font-size:14px;line-height:1.7;color:oklch(0.5 0.02 55);margin:0">The economic and financial history behind this piece is on its way.</p>
@@ -308,6 +314,7 @@ const ARTWORKS_V3 = [
   { id: 'marco-polo', title: 'The Travels of Marco Polo', creator: 'Marco Polo and Rustichello of Pisa', region: 'Venice and the Silk Road', year: 'c. 1298', category: 'Literature', accentName: 'blue', rotate: -2,
     hook: "A Venetian merchant's account of 24 years in Asia, dictated in a prison cell, that showed Europe how large Asian trade really was.",
     caption: "Illuminated manuscript of The Travels of Marco Polo, 15th century.",
+    today: "Kazakhstan sits on today's Silk Road. The Middle Corridor, which carries cargo from China across Kazakhstan, the Caspian Sea, and the Caucasus, has cut delivery times from 38 days to about 13 to 17 days. In February 2026 the World Bank approved an $846 million guarantee to help finance a new Kazakh rail line for it. Like Polo's route, it only works when many borders, operators, and rule systems act as one.",
     writeup: [
       "Marco Polo was born in 1254 into a wealthy Venetian merchant family. In 1271, at age 17, he set out with his father Niccolo and his uncle Maffeo on an overland journey of about three and a half years along trade routes that included the Silk Road, passing through Persia and Samarkand before reaching the summer capital of Kublai Khan in 1275.",
       "Kublai Khan, ruler of the Mongol Yuan dynasty, employed Marco as a roving envoy, and the Polos stayed in Asia for about 17 years. They returned to Venice in 1295. Not long after, Marco was captured during Venice's war with Genoa, and in prison he dictated his story to a fellow prisoner, Rustichello of Pisa. The book, known in Italian as Il Milione, was circulating by around 1298.",
@@ -317,6 +324,7 @@ const ARTWORKS_V3 = [
   { id: 'catalan-atlas', title: 'The Catalan Atlas', creator: 'Abraham Cresques (attributed)', region: 'Majorca', year: '1375', category: 'Map', accentName: 'pink', rotate: 2,
     hook: "A map made for a French king that shows Mali's ruler Mansa Musa on a throne holding gold, a snapshot of how much medieval Europe wanted West African gold.",
     caption: "Abraham Cresques (attributed), Catalan Atlas, 1375, Bibliotheque nationale de France, Paris. Detail showing Mansa Musa.",
+    today: "Mali is again using its gold as leverage. A 2023 mining code raised royalties and the state's share of new projects, and in early 2025 Mali seized about three tonnes of gold from a Barrick mine over the dispute. In November 2025 Barrick settled for about $430 million and accepted the code. This is called resource nationalism, a country trying to keep more of the value of what it digs up.",
     writeup: [
       "The Catalan Atlas is a set of illuminated maps painted on parchment and mounted on six wooden panels. It was completed in 1375 in Majorca and is attributed to Abraham Cresques, a Jewish mapmaker. It is believed to have been made as a gift for King Charles V of France, and it is now held by the Bibliotheque nationale de France in Paris.",
       "On its second panel, the atlas shows Mansa Musa, the ruler of the Mali Empire, seated on a throne and holding a golden orb. The caption calls him the richest and most distinguished ruler of the region because of the great quantity of gold in his lands. The map was drawn about fifty years after his famous pilgrimage to Mecca in 1324.",
@@ -326,6 +334,7 @@ const ARTWORKS_V3 = [
   { id: 'merchant-of-venice', title: 'The Merchant of Venice', creator: 'William Shakespeare', region: 'England, set in Venice', year: 'c. 1596 to 1598', category: 'Literature', accentName: 'blue', rotate: -1.5,
     hook: "A play about a merchant whose whole fortune is on ships at sea, and the loan that shows how risky long-distance trade was.",
     caption: "Title page of the first quarto of The Merchant of Venice, 1600.",
+    today: "The risk of ships at sea is still priced in real time. After the Houthis declared a naval blockade on Saudi Arabia on 20 July 2026, war risk insurance for southern Red Sea voyages rose above 1 percent of a ship's value, up from about 0.3 percent a week earlier, and some Saudi-linked ships were quoted as high as 3 percent. Antonio's problem, a fortune that depends on cargo crossing dangerous water, is now a line in an insurer's spreadsheet.",
     writeup: [
       "Shakespeare wrote this play between about 1596 and 1598. It was entered in the Stationers' Register, the official record of English publications, on 22 July 1598, and the first printed edition appeared in 1600. The story is set in Venice, a city known for merchants and trade.",
       "The title character, Antonio, is a merchant whose wealth is in ships and cargo at sea, bound for places including Tripolis, the Indies, Mexico, and England. When his friend Bassanio needs 3,000 ducats, Antonio cannot simply hand it over, because his capital is tied up in voyages. He guarantees a loan from Shylock, a moneylender, with a bond that allows Shylock to take a pound of Antonio's flesh if the loan is not repaid.",
@@ -335,6 +344,7 @@ const ARTWORKS_V3 = [
   { id: 'kalf-porcelain', title: 'Still Life with a Chinese Porcelain Box', creator: 'Willem Kalf', region: 'Dutch Republic', year: '1662', category: 'Painting', accentName: 'pink', rotate: 1.5,
     hook: "A Chinese porcelain box, Venetian glass, and a silver plate on one table, a snapshot of the global trade that made the Dutch Republic rich.",
     caption: "Willem Kalf, Still Life with a Chinese Porcelain Box, 1662, Gemaldegalerie, Staatliche Museen zu Berlin.",
+    today: "Who gets to tax trade is a live question. On 20 February 2026 the US Supreme Court ruled in Learning Resources v. Trump that the law used for the 2025 emergency tariffs does not allow the president to impose tariffs, and those tariffs ended on 24 February. Other tariffs, including those on steel, aluminum, and cars, and older tariffs on China, stayed in place. The Dutch gave a single company a trade monopoly, while today the argument is over which branch of government controls tariffs.",
     writeup: [
       "This oil painting by the Dutch artist Willem Kalf is signed and dated 1662. It shows a Chinese porcelain box, probably from the Ming dynasty and decorated with relief figures of the Eight Immortals of Taoism, with a fu dog on its lid. Beside it are three glasses, including a Venetian-style one, and a lemon, an orange, and a small knife resting on a silver plate probably made in Amsterdam. All of it sits in a dark interior, lit so that the highlights catch every surface.",
       "Almost nothing on the table was made in the Netherlands in the usual sense of the word. The porcelain came from China, the glass followed Venetian styles, and the citrus came from warmer lands. Museum notes point out that Kalf was exceptional among Dutch still-life painters in how devoted he was to Chinese porcelain, which arrived through overseas trade, and that his reflections capture how delicate and translucent it is.",
@@ -344,6 +354,7 @@ const ARTWORKS_V3 = [
   { id: 'slave-ship', title: 'The Slave Ship', creator: 'J.M.W. Turner', region: 'Britain', year: '1840', category: 'Painting', accentName: 'blue', rotate: 2.5,
     hook: "A storm at sea painted over a real insurance case, in which more than 130 enslaved people were killed and the ship's owners then filed a claim.",
     caption: "J.M.W. Turner, The Slave Ship, 1840, Museum of Fine Arts, Boston.",
+    today: "Law is now trying to put the human cost back into the price of goods. The EU Forced Labour Regulation, which applies from 14 December 2027, bans products made with forced labour from the EU market, whether or not the seller knew about it. The United States has a similar import ban for goods linked to forced labour. In the Zong case, human beings were treated as insured cargo, and these laws aim to stop supply chains from hiding that cost.",
     writeup: [
       "J.M.W. Turner exhibited this oil painting at the Royal Academy in London in 1840. It shows a ship in a violent red sunset and a coming storm, while the bodies and shackled limbs of enslaved people sink into the water in the foreground. Its full title refers to slavers throwing overboard the dead and dying.",
       "The painting was inspired by the Zong massacre. The ship Zong left Accra on 18 August 1781 with 442 enslaved Africans. Starting on 29 November, the crew threw more than 130 of them overboard, saying drinking water was running low. The ship reached Jamaica on 22 December with 208 survivors, and it still had water on board.",
@@ -353,6 +364,7 @@ const ARTWORKS_V3 = [
   { id: 'madama-butterfly', title: 'Madama Butterfly', creator: 'Giacomo Puccini', region: 'Italy, set in Nagasaki', year: '1904', category: 'Opera', accentName: 'pink', rotate: -1.5,
     hook: "An opera set in a Japanese treaty port, in a world created by trade treaties that gave foreigners special privileges in Japan.",
     caption: "Adolfo Hohenstein, poster for the first production of Madama Butterfly, 1904.",
+    today: "Unequal trade terms are still debated. Under the 2025 US and Japan deal, the US cap on tariffs for Japanese goods is 15 percent, and Japan pledged a $550 billion investment envelope in the US. The US leads project selection, and Washington can raise the tariff ceiling if it judges Japan is not meeting its commitments. Supporters call it a fair price for market access, and critics call it lopsided. Japan spent decades getting out of the treaty-port era's unequal terms, so how a deal's terms are set still matters.",
     writeup: [
       "Madama Butterfly premiered at La Scala in Milan on 17 February 1904, with music by Giacomo Puccini and a libretto by Luigi Illica and Giuseppe Giacosa. It is based on a play by David Belasco, which was itself taken from a short story by John Luther Long. The first version had two acts, and a revised three-act version reached the stage in Brescia on 28 May 1904.",
       "The story takes place in a house overlooking the harbor of Nagasaki. An American naval lieutenant, B.F. Pinkerton, marries Cio-Cio-San, a young geisha. Pinkerton treats the marriage as temporary, while she believes it is real. The setting matters economically, because Nagasaki was one of the ports opened to foreign trade by treaties in the 1850s.",
@@ -389,7 +401,7 @@ class Component extends DCLogic {
     });
 
     const found = [...artworks, ...artworks2, ...artworks3].find(a => a.id === this.state.selectedId);
-    const selected = found ? { ...found, writeup: found.writeup || [], noWriteup: !found.writeup } : null;
+    const selected = found ? { ...found, writeup: found.writeup || [], noWriteup: !found.writeup, hasToday: !!found.today } : null;
     const revealEffect = this.props.revealEffect ?? 'Glass pane';
     const modalAnimation = revealEffect === 'Fade & rise' ? 'fadeUp .3s ease' : 'glassIn .35s cubic-bezier(.2,.8,.2,1)';
 
